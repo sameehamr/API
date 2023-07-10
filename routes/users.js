@@ -11,21 +11,4 @@ router.get('/', function(req, res, next) {
   ]);
 });
 
-router.post('/', function(req, res, next) {
-  res.send([
-    {
-      responseCode: "OK", //ERROR
-      message: ""
-    }
-  ]);
-});
-
-router.get('/login', function(req, res, next) {
-  res.send('The list of usersrrrr');
-});
-
-router.get('/logout', function(req, res, next) {
-  res.send('The list of usersrrrr');
-});
-
 module.exports = router;
