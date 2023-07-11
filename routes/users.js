@@ -15,39 +15,65 @@ con.connect(function (err) {
   console.log("Connected!");
 });
 // write to users table//
-router.post('/', function (req, res, next) {
-  console.log("req",  req.body);
-  con.query("INSERT INTO user ( userId, user_role, user_name, user_password, contact_no) VALUES ( 100, 'owner', 'xxy','nope6', 0765748390 )", function (err, result) {
-  //  console.log("Number of records inserted: " + result.affectedRows);//
+// router.post('/', function (req, res, next) {
+  
+//   const data = req.body;
+//   console.log("req",data);
+//   con.query("INSERT INTO user ( user_role, user_name, user_password, contact_no) VALUES ('"+data.role+"', '"+data.name+"' ,'"+data.password+"', "+data.contact+" )", function (err, result) {
+//   //  console.log("Number of records inserted: " + result.affectedRows);//
 
-    if (err) {
+//     if (err) {
+//       console.log(err);
+//       res.send([
+//         {
+//           code: "ERROR",
+//           message: err
+//         }
+//       ]);
+//       return;
+//     }
+
+
+//     res.send([
+//       {
+//         code: "OK",
+//         message: `Number of records inserted: ${result.affectedRows}` 
+//       }
+//     ])
+
+//   });
+
+  /* GET users listing. */
+  router.get('/', function (req, res, next) { 
+    console.log("tttt");
+    con.query("SELECT * FROM user", function (err, result) {
+    console.log(result);
+    
+  
+      if (err) {
+        console.log(err);
+        res.send([
+          {
+            code: "ERROR",
+            message: err
+          }
+        ]);
+        return;
+      }
+  
+  
       res.send([
         {
-          code: "ERROR",
-          message: err
+          code: "OK",
+          data: result
         }
-      ]);
-      return;
-    }
+      ])
+    });
+    });
 
 
-    res.send([
-      {
-        code: "OK",
-        message: `Number of records inserted: ${result.affectedRows}`
-      }
-    ])
 
-  });
-  /* GET users listing. */
-  router.get('/user', function (req, res, next) {
-    res.send([
-      {
-        nm: "ssa",
-        nam: "xaxj"
-      }
-    ]);
-  });
-});
+
+
 
 module.exports = router;
